@@ -43,6 +43,7 @@ export class TasksService {
         task.title = updateTaskDto.title ?? task.title;
         task.description = updateTaskDto.description ?? task.description;
         task.status = updateTaskDto.status ?? task.status;
+        task.dueDate = updateTaskDto.dueDate ?? task.dueDate;
         await task.save();
         
         return task;
