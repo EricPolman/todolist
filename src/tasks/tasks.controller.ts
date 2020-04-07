@@ -18,7 +18,7 @@ export class TasksController {
 
     @Get()
     getAll(@Query(ValidationPipe) getTasksDto: GetTasksDto, @GetUser() user: User): Promise<Task[]> {
-        this.logger.verbose(`User "${user.username}" retrieving tasks. Filters: ${JSON.stringify(getTasksDto)}`)
+        this.logger.verbose(`User "${user.externalUserId}" retrieving tasks. Filters: ${JSON.stringify(getTasksDto)}`)
         return this.tasksService.getTasks(getTasksDto, user);
     }
 

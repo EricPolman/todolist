@@ -1,13 +1,10 @@
 {
     "server": {
-        "port": 3000
+        "port": 2999
     },
     "db": {
         "type": "postgres",
         "port": 5432,
         "database": "todolist"
-    },
-    "jwt": {
-        "expiresIn": 3600
     }
 }
