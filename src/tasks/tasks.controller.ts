@@ -43,4 +43,10 @@ export class TasksController {
     updateStatus(@Param("id", ParseIntPipe) id: number, @GetUser() user: User, @Body("status", TaskStatusValidationPipe) status?: TaskStatus ): Promise<Task> {
         return this.tasksService.updateTask({ id, status }, user);
     }
+
+    @Patch(":id/list") 
+    updateList(@Param("id", ParseIntPipe) id: number, @GetUser() user: User, @Body("listId") listId?: number ): Promise<Task> {
+        console.log(listId);
+        return this.tasksService.linkTaskToList({ id, listId }, user);
+    }
 }

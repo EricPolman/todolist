@@ -2,6 +2,7 @@ import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "t
 import { TaskStatus } from "./task-status.enum";
 import { User } from "src/auth/user.entity";
 import { TaskPriority } from "./task-priority.enum";
+import { List } from "src/lists/list.entity";
 
 @Entity()
 export class Task extends BaseEntity {
@@ -17,7 +18,7 @@ export class Task extends BaseEntity {
     @Column()
     status: TaskStatus;
 
-    @Column()
+    @Column({ nullable: true })
     dueDate: Date;
 
     @Column()
@@ -29,4 +30,9 @@ export class Task extends BaseEntity {
     @Column()
     userId: number;
 
+    @ManyToOne(type => List, list => list.tasks, { eager: false })
+    list: List;
+
+    @Column({ nullable: true })
+    listId: number;
 }

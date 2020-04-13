@@ -1,5 +1,5 @@
 import { TaskStatus } from "../task-status.enum";
-import { IsOptional, IsDateString, IsString, IsEnum } from "class-validator";
+import { IsOptional, IsDateString, IsString, IsEnum, IsNumber } from "class-validator";
 import { TaskPriority } from "../task-priority.enum";
 
 export class UpdateTaskDto {
@@ -19,6 +19,10 @@ export class UpdateTaskDto {
 
     @IsOptional()
     status?: TaskStatus;
+
+    @IsOptional()
+    @IsNumber()
+    listId?: number;
 
     @IsOptional()
     @IsEnum(TaskPriority)

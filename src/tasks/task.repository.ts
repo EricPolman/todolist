@@ -23,6 +23,11 @@ export class TaskRepository extends Repository<Task> {
             query.andWhere("task.status = :status", { status });
         }
 
+        // query.orderBy("task.dueDate", "ASC");
+        // query.orderBy("task.priority", "DESC");
+        query.orderBy("task.id", "ASC");
+        // query.orderBy("task.status", "DESC");
+
         const tasks = await query.getMany();
         return tasks;
     }
