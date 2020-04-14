@@ -5,7 +5,7 @@ import { CreateTaskDto } from "../dto/tasks/create-task.dto";
 import { DeleteTaskDto } from "../dto/tasks/delete-task.dto";
 import { NotFoundException, Logger } from "@nestjs/common";
 import { GetTasksDto } from "../dto/tasks/get-tasks.dto";
-import { User } from "src/auth/user.entity";
+import { User } from "src/core/entities/user.entity";
 
 @EntityRepository(Task)
 export class TaskRepository extends Repository<Task> {
@@ -47,6 +47,7 @@ export class TaskRepository extends Repository<Task> {
         task.status = TaskStatus.OPEN;
         task.priority = createTaskDto.priority;
         task.user = user;
+        task.listId = user.defaultListId;
         await task.save();
 
         delete task.user;

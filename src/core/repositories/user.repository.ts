@@ -1,12 +1,12 @@
 import { Repository, EntityRepository } from "typeorm";
-import { User } from "./user.entity";
+import { User } from "../entities/user.entity";
 import { ConflictException, InternalServerErrorException } from "@nestjs/common";
 import * as argon from "argon2";
-import { CreateUserDto } from "./dto/create-user.dto";
+import { CreateUserDto } from "../dto/users/create-user.dto";
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
-    async createUser(createUserDto: CreateUserDto): Promise<User> {
+    async saveUser(createUserDto: CreateUserDto): Promise<User> {
         const user = new User();
         const { externalUserId, email, name } = createUserDto;
 

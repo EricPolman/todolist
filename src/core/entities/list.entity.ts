@@ -1,5 +1,5 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { User } from "src/auth/user.entity";
+import { User } from "src/core/entities/user.entity";
 import { Task } from "src/core/entities/task.entity";
 import { ListGroup } from "src/core/entities/list-group.entity";
 
@@ -28,4 +28,7 @@ export class List extends BaseEntity {
 
     @Column({ nullable: true })
     listGroupId: number;
+    
+    @Column({ default: false })
+    createdBySystem: boolean;
 }

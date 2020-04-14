@@ -6,7 +6,7 @@ import { DeleteListGroupDto } from '../dto/list-groups/delete-list-group.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ListGroupRepository } from '../repositories/list-group.repository';
 import { UpdateListGroupDto } from '../dto/list-groups/update-list-group.dto';
-import { User } from 'src/auth/user.entity';
+import { User } from 'src/core/entities/user.entity';
 import { UserListGroupRepository } from '../repositories/user-list-group.repository';
 
 @Injectable()

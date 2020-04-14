@@ -1,5 +1,5 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany } from "typeorm";
-import { User } from "src/auth/user.entity";
+import { User } from "src/core/entities/user.entity";
 import { List } from "./list.entity";
 import { UserListGroup } from "./user-list-group.entity";
 
@@ -16,4 +16,7 @@ export class ListGroup extends BaseEntity {
     
     @OneToMany(type => UserListGroup, ulg => ulg.listGroup)
     userConnections: UserListGroup[];
+
+    @Column({ default: false })
+    createdBySystem: boolean;
 }

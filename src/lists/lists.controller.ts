@@ -1,6 +1,6 @@
 import { Controller, Logger, Get, Post, Delete, Patch, ParseIntPipe, Param, Body, UseGuards, Query } from '@nestjs/common';
 import { ListsService } from '../core/services/lists.service';
-import { User } from 'src/auth/user.entity';
+import { User } from 'src/core/entities/user.entity';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { List } from '../core/entities/list.entity';
 import { CreateListDto } from '../core/dto/lists/create-list.dto';

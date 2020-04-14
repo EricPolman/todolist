@@ -1,7 +1,7 @@
 import { Repository, EntityRepository } from "typeorm";
 import { ListGroup } from "../entities/list-group.entity";
 import { NotFoundException, Logger } from "@nestjs/common";
-import { User } from "src/auth/user.entity";
+import { User } from "src/core/entities/user.entity";
 import { DeleteListGroupDto } from "../dto/list-groups/delete-list-group.dto";
 import { CreateListGroupDto } from "../dto/list-groups/create-list-group.dto";
 

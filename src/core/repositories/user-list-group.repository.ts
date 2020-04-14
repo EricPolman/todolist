@@ -2,7 +2,7 @@ import { Repository, EntityRepository } from "typeorm";
 import { ListGroup } from "../entities/list-group.entity";
 import { UserListGroup } from "../entities/user-list-group.entity";
 import { DeleteListGroupDto } from "../dto/list-groups/delete-list-group.dto";
-import { User } from "src/auth/user.entity";
+import { User } from "src/core/entities/user.entity";
 import { NotFoundException, UnauthorizedException } from "@nestjs/common";
 
 @EntityRepository(UserListGroup)

@@ -6,7 +6,7 @@ import { GetTasksDto } from '../dto/tasks/get-tasks.dto';
 import { TaskRepository } from '../repositories/task.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from '../entities/task.entity';
-import { User } from 'src/auth/user.entity';
+import { User } from 'src/core/entities/user.entity';
 import { List } from 'src/core/entities/list.entity';
 import { ListRepository } from 'src/core/repositories/list.repository';
 

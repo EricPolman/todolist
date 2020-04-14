@@ -1,6 +1,6 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { TaskStatus } from "../enums/task-status.enum";
-import { User } from "src/auth/user.entity";
+import { User } from "src/core/entities/user.entity";
 import { TaskPriority } from "../enums/task-priority.enum";
 import { List } from "src/core/entities/list.entity";
 

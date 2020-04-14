@@ -1,5 +1,5 @@
 import { BaseEntity, Entity, OneToOne, JoinColumn, PrimaryColumn, ManyToOne } from "typeorm";
-import { User } from "src/auth/user.entity";
+import { User } from "src/core/entities/user.entity";
 import { List } from "./list.entity";
 import { ListGroup } from "./list-group.entity";
 

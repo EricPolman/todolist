@@ -3,7 +3,7 @@ import { CreateListGroupDto } from '../core/dto/list-groups/create-list-group.dt
 import { GetUser } from 'src/auth/get-user.decorator';
 import { ListGroup } from '../core/entities/list-group.entity';
 import { ListGroupsService } from '../core/services/list-groups.service';
-import { User } from 'src/auth/user.entity';
+import { User } from 'src/core/entities/user.entity';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('list-groups')

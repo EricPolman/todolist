@@ -1,22 +1,17 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { UserRepository } from './user.repository';
-import { User } from './user.entity';
+import { User } from '../core/entities/user.entity';
 import { passportJwtSecret } from 'jwks-rsa';
-import * as config from 'config';
 import { JwtPayload } from './jwt-payload.interface';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from '../core/dto/users/create-user.dto';
 import {validate} from "class-validator";
-const jwksRsa = require('jwks-rsa');
-
+import { AuthService } from '../core/services/auth.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
     constructor(
-        @InjectRepository(UserRepository)
-        private userRepository: UserRepository
+        private authService: AuthService
     ) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -34,7 +29,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
     async validate(payload: JwtPayload): Promise<User> {
         const { sub: externalUserId, email, name } = payload;
 
-        let user = await this.userRepository.findOne({ externalUserId });
+        let user = await this.authService.getUserByExternalId(externalUserId);
         if (!user) {
             const dto: CreateUserDto = { externalUserId, email, name };
             const errors = await validate(dto);
@@ -42,7 +37,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
                 console.log(errors);
                 throw new UnauthorizedException();
             }
-            user = await this.userRepository.createUser(dto);
+            user = await this.authService.createUser(dto);
         }
 
         return user;

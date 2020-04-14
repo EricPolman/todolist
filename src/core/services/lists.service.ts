@@ -4,7 +4,7 @@ import { DeleteListDto } from '../dto/lists/delete-list.dto';
 import { ListRepository } from '../repositories/list.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { List } from '../entities/list.entity';
-import { User } from 'src/auth/user.entity';
+import { User } from 'src/core/entities/user.entity';
 import { UpdateListDto } from '../dto/lists/update-list.dto';
 import { ListGroup } from 'src/core/entities/list-group.entity';
 import { ListGroupRepository } from 'src/core/repositories/list-group.repository';

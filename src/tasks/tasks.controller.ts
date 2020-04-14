@@ -7,7 +7,7 @@ import { Task } from '../core/entities/task.entity';
 import { TaskStatus } from '../core/enums/task-status.enum';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
-import { User } from 'src/auth/user.entity';
+import { User } from 'src/core/entities/user.entity';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
