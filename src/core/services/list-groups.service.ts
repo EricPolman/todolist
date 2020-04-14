@@ -1,38 +1,49 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ListGroup } from '../entities/list-group.entity';
+import { UserListGroup } from '../entities/user-list-group.entity';
 import { CreateListGroupDto } from '../dto/list-groups/create-list-group.dto';
 import { DeleteListGroupDto } from '../dto/list-groups/delete-list-group.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ListGroupRepository } from '../repositories/list-group.repository';
 import { UpdateListGroupDto } from '../dto/list-groups/update-list-group.dto';
 import { User } from 'src/auth/user.entity';
+import { UserListGroupRepository } from '../repositories/user-list-group.repository';
 
 @Injectable()
 export class ListGroupsService {
     constructor(
         @InjectRepository(ListGroupRepository)
-        private listGroupRepository: ListGroupRepository
+        private listGroupRepository: ListGroupRepository,
+        private userListGroupRepository: UserListGroupRepository
     ) { }
 
-    getListGroups(user: User): Promise<ListGroup[]> {
-        return this.listGroupRepository.getListGroups(user);
+    async getListGroups(user: User): Promise<ListGroup[]> {
+        const userListGroups = await this.userListGroupRepository.find({ userId: user.id });
+        return userListGroups.map(userListGroup => userListGroup.listGroup);
     }
 
     async getListGroupById(id: number, user: User): Promise<ListGroup> {
-        const listGroup = await this.listGroupRepository.findOne({ where: { id, userId: user.id } });
+        const listGroup = await this.userListGroupRepository.findOne({ where :{ userId: user.id, listGroupId: id }});
 
         if (!listGroup) {
             throw new NotFoundException(`ListGroup with id '${id}' not found.`);
         }
 
+        return listGroup.listGroup;
+    }
+
+    async createListGroup(createListGroupDto: CreateListGroupDto, user: User): Promise<ListGroup> {
+        const listGroup = await this.listGroupRepository.createListGroup(createListGroupDto, user);
+        const userListGroup = new UserListGroup();
+        userListGroup.userId = user.id;
+        userListGroup.listGroupId = listGroup.id;
+        await userListGroup.save();
+
         return listGroup;
     }
 
-    createListGroup(createListGroupDto: CreateListGroupDto, user: User): Promise<ListGroup> {
-        return this.listGroupRepository.createListGroup(createListGroupDto, user);
-    }
-
-    deleteListGroup(deleteListGroupDto: DeleteListGroupDto, user: User): Promise<void> {
+    async deleteListGroup(deleteListGroupDto: DeleteListGroupDto, user: User): Promise<void> {
+        await this.userListGroupRepository.deleteForListGroup(deleteListGroupDto, user);
         return this.listGroupRepository.deleteListGroup(deleteListGroupDto, user);
     }
 

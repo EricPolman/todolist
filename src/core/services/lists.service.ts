@@ -56,7 +56,7 @@ export class ListsService {
             // Unlink
             list.listGroup = null;
         } else {
-            const listGroup: ListGroup = await this.listGroupRepository.findOne({ id: updateListDto.listGroupId, userId: user.id });
+            const listGroup: ListGroup = await this.listGroupRepository.findOne({ id: updateListDto.listGroupId });
             if (!listGroup) {
                 throw new NotFoundException(`List Group with id '${updateListDto.listGroupId}' not found.`);
             }

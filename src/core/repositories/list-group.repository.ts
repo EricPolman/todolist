@@ -8,23 +8,20 @@ import { CreateListGroupDto } from "../dto/list-groups/create-list-group.dto";
 @EntityRepository(ListGroup)
 export class ListGroupRepository extends Repository<ListGroup> {
     async getListGroups(user: User): Promise<ListGroup[]> {
-        return this.find({ userId: user.id });
+        return this.find();
     }
 
     async createListGroup(createListGroupDto: CreateListGroupDto, user: User): Promise<ListGroup> {
         const listGroup = new ListGroup();
         listGroup.name = createListGroupDto.name;
-        listGroup.user = user;
         await listGroup.save();
-
-        delete listGroup.user;
 
         return listGroup;
     }
 
     async deleteListGroup(deleteListGroupDto: DeleteListGroupDto, user: User): Promise<void> {
         const { id } = deleteListGroupDto;
-        const result = await this.delete({ id, userId: user.id });
+        const result = await this.delete({ id });
         if (result.affected === 0) {
             throw new NotFoundException(`List group with id '${id}' not found.`);
         }

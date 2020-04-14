@@ -6,9 +6,15 @@ import { ListGroupRepository } from './repositories/list-group.repository';
 import { TasksService } from './services/tasks.service';
 import { ListsService } from './services/lists.service';
 import { ListGroupsService } from './services/list-groups.service';
+import { UserListGroupRepository } from './repositories/user-list-group.repository';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([TaskRepository, ListRepository, ListGroupRepository])],
+    imports: [TypeOrmModule.forFeature([
+        TaskRepository,
+        ListRepository,
+        ListGroupRepository,
+        UserListGroupRepository
+    ])],
     providers: [TasksService, ListsService, ListGroupsService],
     exports: [TasksService, ListsService, ListGroupsService]
 })
