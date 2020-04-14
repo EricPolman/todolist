@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from "class-validator";
+import { IsOptional, IsString, IsNumber } from "class-validator";
 
 export class UpdateListDto {
     id: number;
@@ -10,4 +10,8 @@ export class UpdateListDto {
     @IsOptional()
     @IsString()
     description?: string;
+
+    @IsOptional()
+    @IsNumber()
+    listGroupId?: number;
 }

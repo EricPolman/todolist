@@ -1,5 +1,6 @@
 import { TaskStatus } from "../task-status.enum";
-import { IsIn, IsOptional, IsNotEmpty, IsNumber, Max, IsPositive } from "class-validator";
+import { IsIn, IsOptional, IsNotEmpty, Max, IsPositive, IsNumber, Min } from "class-validator";
+import { Transform } from "class-transformer";
 
 export class GetTasksDto {
     @IsOptional()
@@ -14,10 +15,15 @@ export class GetTasksDto {
     @IsNumber()
     @IsPositive()
     @Max(200)
+    @Transform(value => Number(value))
     limit: number;
 
     @IsOptional()
     @IsNumber()
-    @IsPositive()
+    @Min(0)
+    @Transform(value => Number(value))
     page: number;
+
+    @IsOptional()
+    listId: number;
 }

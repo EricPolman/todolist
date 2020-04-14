@@ -4,17 +4,12 @@ import { NotFoundException, Logger } from "@nestjs/common";
 import { User } from "src/auth/user.entity";
 import { DeleteListDto } from "./dto/delete-list.dto";
 import { CreateListDto } from "./dto/create-list.dto";
+import { Task } from "src/tasks/task.entity";
 
 @EntityRepository(List)
 export class ListRepository extends Repository<List> {
     async getLists(user: User): Promise<List[]> {
-        const query = this.createQueryBuilder('list');
-
-        query.where("list.userId = :userId", { userId: user.id });
-    
-        const lists = await query.getMany();
-        
-        return lists;
+        return this.find({ userId: user.id });
     }
 
     async createList(createListDto: CreateListDto, user: User): Promise<List> {

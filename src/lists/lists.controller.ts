@@ -1,10 +1,12 @@
-import { Controller, Logger, Get, Post, Delete, Patch, ParseIntPipe, Param, Body, UseGuards } from '@nestjs/common';
+import { Controller, Logger, Get, Post, Delete, Patch, ParseIntPipe, Param, Body, UseGuards, Query } from '@nestjs/common';
 import { ListsService } from './lists.service';
 import { User } from 'src/auth/user.entity';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { List } from './list.entity';
 import { CreateListDto } from './dto/create-list.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { GetTasksDto } from 'src/tasks/dto/get-tasks.dto';
+import { Task } from 'src/tasks/task.entity';
 
 @Controller('lists')
 @UseGuards(AuthGuard())
@@ -37,7 +39,12 @@ export class ListsController {
     }
 
     @Patch(":id/name") 
-    updateStatus(@Param("id", ParseIntPipe) id: number, @GetUser() user: User, @Body("name") name: string ): Promise<List> {
+    updateName(@Param("id", ParseIntPipe) id: number, @GetUser() user: User, @Body("name") name: string ): Promise<List> {
         return this.listsService.updateList({ id, name }, user);
+    }
+
+    @Patch(":id/list-group") 
+    updateList(@Param("id", ParseIntPipe) id: number, @GetUser() user: User, @Body("listGroupId") listGroupId?: number ): Promise<List> {
+        return this.listsService.linkListToListGroup({ id, listGroupId }, user);
     }
 }

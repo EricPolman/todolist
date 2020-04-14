@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { TaskStatus } from "./task-status.enum";
 import { User } from "src/auth/user.entity";
 import { TaskPriority } from "./task-priority.enum";
@@ -24,15 +24,21 @@ export class Task extends BaseEntity {
     @Column()
     priority: TaskPriority;
 
-    @ManyToOne(type => User, user => user.tasks, { eager: false })
+    @ManyToOne(type => User, user => user.tasks, { eager: false, onDelete: "CASCADE" })
     user: User;
 
     @Column()
     userId: number;
 
-    @ManyToOne(type => List, list => list.tasks, { eager: false })
+    @ManyToOne(type => List, list => list.tasks, { eager: false, onDelete: "CASCADE" })
     list: List;
 
     @Column({ nullable: true })
     listId: number;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

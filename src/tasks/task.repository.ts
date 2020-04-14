@@ -10,7 +10,7 @@ import { User } from "src/auth/user.entity";
 @EntityRepository(Task)
 export class TaskRepository extends Repository<Task> {
     async getTasks(getTasksDto: GetTasksDto, user: User): Promise<Task[]> {
-        const { search, status } = getTasksDto;
+        const { search, status, listId, page = 0, limit = 20 } = getTasksDto;
         const query = this.createQueryBuilder('task');
 
         query.where("task.userId = :userId", { userId: user.id });
@@ -22,6 +22,13 @@ export class TaskRepository extends Repository<Task> {
         if (status) {
             query.andWhere("task.status = :status", { status });
         }
+
+        if (listId) {
+            query.andWhere("task.listId = :listId", { listId });
+        }
+        
+        query.offset(page * limit);
+        query.limit(limit);
 
         // query.orderBy("task.dueDate", "ASC");
         // query.orderBy("task.priority", "DESC");
