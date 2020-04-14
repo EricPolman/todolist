@@ -1,10 +1,10 @@
 import { Controller, Get, Delete, Post, Patch, Body, Param, Query, ParseIntPipe, UseGuards, Logger } from '@nestjs/common';
-import { TasksService } from './tasks.service';
-import { GetTasksDto } from './dto/get-tasks.dto';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
-import { Task } from './task.entity';
-import { TaskStatus } from './task-status.enum';
+import { TasksService } from '../core/services/tasks.service';
+import { GetTasksDto } from '../core/dto/tasks/get-tasks.dto';
+import { CreateTaskDto } from '../core/dto/tasks/create-task.dto';
+import { TaskStatusValidationPipe } from '../core/pipes/task-status-validation.pipe';
+import { Task } from '../core/entities/task.entity';
+import { TaskStatus } from '../core/enums/task-status.enum';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/auth/user.entity';

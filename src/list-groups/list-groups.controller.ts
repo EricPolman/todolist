@@ -1,8 +1,8 @@
 import { Controller, Body, Delete, Get, Logger, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common';
-import { CreateListGroupDto } from './dto/create-list-group.dto';
+import { CreateListGroupDto } from '../core/dto/list-groups/create-list-group.dto';
 import { GetUser } from 'src/auth/get-user.decorator';
-import { ListGroup } from './list-group.entity';
-import { ListGroupsService } from './list-groups.service';
+import { ListGroup } from '../core/entities/list-group.entity';
+import { ListGroupsService } from '../core/services/list-groups.service';
 import { User } from 'src/auth/user.entity';
 import { AuthGuard } from '@nestjs/passport';
 

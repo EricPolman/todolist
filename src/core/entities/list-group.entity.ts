@@ -1,6 +1,6 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { User } from "src/auth/user.entity";
-import { List } from "../lists/list.entity";
+import { List } from "./list.entity";
 
 @Entity()
 export class ListGroup extends BaseEntity {

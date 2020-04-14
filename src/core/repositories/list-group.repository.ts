@@ -1,9 +1,9 @@
 import { Repository, EntityRepository } from "typeorm";
-import { ListGroup } from "./list-group.entity";
+import { ListGroup } from "../entities/list-group.entity";
 import { NotFoundException, Logger } from "@nestjs/common";
 import { User } from "src/auth/user.entity";
-import { DeleteListGroupDto } from "./dto/delete-list-group.dto";
-import { CreateListGroupDto } from "./dto/create-list-group.dto";
+import { DeleteListGroupDto } from "../dto/list-groups/delete-list-group.dto";
+import { CreateListGroupDto } from "../dto/list-groups/create-list-group.dto";
 
 @EntityRepository(ListGroup)
 export class ListGroupRepository extends Repository<ListGroup> {

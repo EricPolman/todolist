@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateListDto } from './dto/create-list.dto';
-import { DeleteListDto } from './dto/delete-list.dto';
-import { ListRepository } from './list.repository';
+import { CreateListDto } from '../dto/lists/create-list.dto';
+import { DeleteListDto } from '../dto/lists/delete-list.dto';
+import { ListRepository } from '../repositories/list.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { List } from './list.entity';
+import { List } from '../entities/list.entity';
 import { User } from 'src/auth/user.entity';
-import { UpdateListDto } from './dto/update-list.dto';
-import { ListGroup } from 'src/list-groups/list-group.entity';
-import { ListGroupRepository } from 'src/list-groups/list-group.repository';
+import { UpdateListDto } from '../dto/lists/update-list.dto';
+import { ListGroup } from 'src/core/entities/list-group.entity';
+import { ListGroupRepository } from 'src/core/repositories/list-group.repository';
 
 @Injectable()
 export class ListsService {

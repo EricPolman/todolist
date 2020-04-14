@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { ListGroup } from './list-group.entity';
-import { CreateListGroupDto } from './dto/create-list-group.dto';
-import { DeleteListGroupDto } from './dto/delete-list-group.dto';
+import { ListGroup } from '../entities/list-group.entity';
+import { CreateListGroupDto } from '../dto/list-groups/create-list-group.dto';
+import { DeleteListGroupDto } from '../dto/list-groups/delete-list-group.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ListGroupRepository } from './list-group.repository';
-import { UpdateListGroupDto } from './dto/update-list-group.dto';
+import { ListGroupRepository } from '../repositories/list-group.repository';
+import { UpdateListGroupDto } from '../dto/list-groups/update-list-group.dto';
 import { User } from 'src/auth/user.entity';
 
 @Injectable()

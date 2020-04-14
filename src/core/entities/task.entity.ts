@@ -1,8 +1,8 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
-import { TaskStatus } from "./task-status.enum";
+import { TaskStatus } from "../enums/task-status.enum";
 import { User } from "src/auth/user.entity";
-import { TaskPriority } from "./task-priority.enum";
-import { List } from "src/lists/list.entity";
+import { TaskPriority } from "../enums/task-priority.enum";
+import { List } from "src/core/entities/list.entity";
 
 @Entity()
 export class Task extends BaseEntity {

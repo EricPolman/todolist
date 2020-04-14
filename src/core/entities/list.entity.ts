@@ -1,7 +1,7 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { User } from "src/auth/user.entity";
-import { Task } from "src/tasks/task.entity";
-import { ListGroup } from "src/list-groups/list-group.entity";
+import { Task } from "src/core/entities/task.entity";
+import { ListGroup } from "src/core/entities/list-group.entity";
 
 @Entity()
 export class List extends BaseEntity {

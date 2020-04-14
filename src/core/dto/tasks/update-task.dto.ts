@@ -1,6 +1,6 @@
-import { TaskStatus } from "../task-status.enum";
+import { TaskStatus } from "../../enums/task-status.enum";
 import { IsOptional, IsDateString, IsString, IsEnum, IsNumber } from "class-validator";
-import { TaskPriority } from "../task-priority.enum";
+import { TaskPriority } from "../../enums/task-priority.enum";
 
 export class UpdateTaskDto {
     id: number;

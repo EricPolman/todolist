@@ -1,10 +1,10 @@
 import { Repository, EntityRepository } from "typeorm";
-import { Task } from "./task.entity";
-import { TaskStatus } from "./task-status.enum";
-import { CreateTaskDto } from "./dto/create-task.dto";
-import { DeleteTaskDto } from "./dto/delete-task.dto";
+import { Task } from "../entities/task.entity";
+import { TaskStatus } from "../enums/task-status.enum";
+import { CreateTaskDto } from "../dto/tasks/create-task.dto";
+import { DeleteTaskDto } from "../dto/tasks/delete-task.dto";
 import { NotFoundException, Logger } from "@nestjs/common";
-import { GetTasksDto } from "./dto/get-tasks.dto";
+import { GetTasksDto } from "../dto/tasks/get-tasks.dto";
 import { User } from "src/auth/user.entity";
 
 @EntityRepository(Task)

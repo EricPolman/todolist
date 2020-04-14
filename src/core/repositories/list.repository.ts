@@ -1,10 +1,10 @@
 import { Repository, EntityRepository } from "typeorm";
-import { List } from "./list.entity";
+import { List } from "../entities/list.entity";
 import { NotFoundException, Logger } from "@nestjs/common";
 import { User } from "src/auth/user.entity";
-import { DeleteListDto } from "./dto/delete-list.dto";
-import { CreateListDto } from "./dto/create-list.dto";
-import { Task } from "src/tasks/task.entity";
+import { DeleteListDto } from "../dto/lists/delete-list.dto";
+import { CreateListDto } from "../dto/lists/create-list.dto";
+import { Task } from "src/core/entities/task.entity";
 
 @EntityRepository(List)
 export class ListRepository extends Repository<List> {

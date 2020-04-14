@@ -1,19 +1,20 @@
 import { Controller, Logger, Get, Post, Delete, Patch, ParseIntPipe, Param, Body, UseGuards, Query } from '@nestjs/common';
-import { ListsService } from './lists.service';
+import { ListsService } from '../core/services/lists.service';
 import { User } from 'src/auth/user.entity';
 import { GetUser } from 'src/auth/get-user.decorator';
-import { List } from './list.entity';
-import { CreateListDto } from './dto/create-list.dto';
+import { List } from '../core/entities/list.entity';
+import { CreateListDto } from '../core/dto/lists/create-list.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { GetTasksDto } from 'src/tasks/dto/get-tasks.dto';
-import { Task } from 'src/tasks/task.entity';
+import { GetTasksDto } from 'src/core/dto/tasks/get-tasks.dto';
+import { Task } from 'src/core/entities/task.entity';
+import { TasksService } from 'src/core/services/tasks.service';
 
 @Controller('lists')
 @UseGuards(AuthGuard())
 export class ListsController {
     private logger = new Logger("ListsController");
 
-    constructor(private listsService: ListsService) { }
+    constructor(private listsService: ListsService, private tasksService: TasksService) { }
 
     @Get()
     getAll(@GetUser() user: User): Promise<List[]> {
@@ -24,6 +25,12 @@ export class ListsController {
     @Get(":id")
     get(@Param("id", ParseIntPipe) id: number, @GetUser() user: User): Promise<List> {
         return this.listsService.getListById(id, user);
+    }
+
+    @Get(":id/tasks")
+    getTasks(@Param("id", ParseIntPipe) id: number, @Query() getTasksDto: GetTasksDto, @GetUser() user: User): Promise<Task[]> {
+        this.logger.verbose(`User '${user.externalUserId}' retrieving tasks for list '${id}'. Filters: ${JSON.stringify(getTasksDto)}`);
+        return this.tasksService.getTasks({...getTasksDto, listId: id}, user);
     }
 
     @Post()

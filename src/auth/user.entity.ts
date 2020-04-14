@@ -1,6 +1,6 @@
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Unique, OneToMany } from "typeorm";
-import { Task } from "src/tasks/task.entity";
-import { List } from "src/lists/list.entity";
+import { Task } from "src/core/entities/task.entity";
+import { List } from "src/core/entities/list.entity";
 
 @Entity()
 @Unique(["externalUserId"])

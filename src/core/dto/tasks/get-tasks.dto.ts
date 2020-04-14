@@ -1,4 +1,4 @@
-import { TaskStatus } from "../task-status.enum";
+import { TaskStatus } from "../../enums/task-status.enum";
 import { IsIn, IsOptional, IsNotEmpty, Max, IsPositive, IsNumber, Min } from "class-validator";
 import { Transform } from "class-transformer";
 

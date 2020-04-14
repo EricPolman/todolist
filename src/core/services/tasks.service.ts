@@ -1,14 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { DeleteTaskDto } from './dto/delete-task.dto';
-import { UpdateTaskDto } from './dto/update-task.dto';
-import { GetTasksDto } from './dto/get-tasks.dto';
-import { TaskRepository } from './task.repository';
+import { CreateTaskDto } from '../dto/tasks/create-task.dto';
+import { DeleteTaskDto } from '../dto/tasks/delete-task.dto';
+import { UpdateTaskDto } from '../dto/tasks/update-task.dto';
+import { GetTasksDto } from '../dto/tasks/get-tasks.dto';
+import { TaskRepository } from '../repositories/task.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Task } from './task.entity';
+import { Task } from '../entities/task.entity';
 import { User } from 'src/auth/user.entity';
-import { List } from 'src/lists/list.entity';
-import { ListRepository } from 'src/lists/list.repository';
+import { List } from 'src/core/entities/list.entity';
+import { ListRepository } from 'src/core/repositories/list.repository';
 
 @Injectable()
 export class TasksService {
@@ -19,7 +19,16 @@ export class TasksService {
         private listRepository: ListRepository
     ) { }
 
-    getTasks(getTasksDto: GetTasksDto, user: User): Promise<Task[]> {
+    async getTasks(getTasksDto: GetTasksDto, user: User): Promise<Task[]> {
+        if (getTasksDto.listId) {
+            // If list ID is present,  check if list belongs to user
+            const listId = getTasksDto.listId;
+            const list = await this.listRepository.findOne({ id: listId, userId: user.id });
+            if (!list) {
+                throw new NotFoundException(`List with id '${listId}' not found.`);
+            }
+        }
+
         return this.taskRepository.getTasks(getTasksDto, user);
     }
 

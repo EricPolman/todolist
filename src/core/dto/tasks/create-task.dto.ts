@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsDate, IsDateString, IsEnum, IsOptional, IsString } from "class-validator";
-import { TaskPriority } from "../task-priority.enum";
+import { TaskPriority } from "../../enums/task-priority.enum";
 
 export class CreateTaskDto {
     @IsNotEmpty()
