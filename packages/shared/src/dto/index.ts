@@ -1,6 +1,4 @@
-import * as ListGroups from "./list-groups";
-import * as Lists from "./lists";
-import * as Tasks from "./tasks";
-import * as Users from "./users";
-
-export { ListGroups, Lists, Tasks, Users };
+export { CreateListGroupDto, DeleteListGroupDto, UpdateListGroupDto } from "./list-groups";
+export { CreateListDto, DeleteListDto, UpdateListDto } from "./lists";
+export { CreateTaskDto, DeleteTaskDto, GetTasksDto, UpdateTaskDto } from "./tasks";
+export { CreateUserDto } from "./users";
