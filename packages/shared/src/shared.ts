@@ -12,5 +12,5 @@ export {
     CreateUserDto
 } from "./dto";
 export { TaskPriority, TaskStatus } from "./enums";
-export { ITask } from "./interfaces";
+export { ITask, IList, IUser } from "./interfaces";
 
