@@ -1,0 +1,3 @@
+export const GET_LISTS = 'GET_LISTS'
+export const SET_LISTS = 'SET_LISTS'
+export const SET_LIST_SHOW_DONE_ITEMS = 'SET_LIST_SHOW_DONE_ITEMS'
