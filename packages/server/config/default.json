@@ -1,0 +1,10 @@
+{
+    "server": {
+        "port": 2999
+    },
+    "db": {
+        "type": "postgres",
+        "port": 5432,
+        "database": "todolist"
+    }
+}
